@@ -62,7 +62,6 @@ about:
   #license_file: No MANIFEST.in in source
   license_family: MIT
   summary: 'Command line tools and libraries for handling and manipulating WARC files (and HTTP contents)'
-  license_family: MIT
   dev_url: https://github.com/internetarchive/warctools
 
 extra:
