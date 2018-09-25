@@ -1,24 +1,17 @@
-{%set name = "warctools" %}
-{%set version = "4.10.0" %}
-{%set compress_type = "tar.gz" %}
-{%set hash_type = "sha256" %}
-{%set hash_val = "ce0c6e274db8ac8810f7c97b3943e8e8deadbc3f5c982db77cddaae2d2ae6170" %}
-{%set build_num = "0" %}
+{% set version = "4.10.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: warctools
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.{{ compress_type }}
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ compress_type }}
-  {{ hash_type }}: {{ hash_val }}
+  url: https://pypi.io/packages/source/w/warctools/warctools-{{ version }}.tar.gz
+  sha256: ce0c6e274db8ac8810f7c97b3943e8e8deadbc3f5c982db77cddaae2d2ae6170
 
 build:
-  skip: True  # [py2k or py35]
-  number: {{ build_num }}
-  preserve_egg_dir: True
-  script: python setup.py install --single-version-externally-managed --record=record.txt
+  number: 1
+  noarch: python
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
   entry_points:
     - warcdump=hanzo.warcdump:run
     - arc2warc=hanzo.arc2warc:run
@@ -31,12 +24,11 @@ build:
     - warcpayload=hanzo.warcpayload:run
 
 requirements:
-  build:
-    - python
-    - setuptools
-
+  host:
+    - python >=3.4,<3.5
+    - pip
   run:
-    - python
+    - python >=3.4,<3.5
     - setuptools
 
 test:
@@ -62,7 +54,6 @@ about:
   #license_file: No MANIFEST.in in source
   license_family: MIT
   summary: 'Command line tools and libraries for handling and manipulating WARC files (and HTTP contents)'
-  license_family: MIT
   dev_url: https://github.com/internetarchive/warctools
 
 extra:
