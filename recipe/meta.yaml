@@ -25,10 +25,10 @@ build:
 
 requirements:
   host:
-    - python >=3.4,<3.6
+    - python >=3.4,<3.5
     - pip
   run:
-    - python >=3.4,<3.6
+    - python >=3.4,<3.5
     - setuptools
 
 test:
